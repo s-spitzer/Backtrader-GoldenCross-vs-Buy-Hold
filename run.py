@@ -1,9 +1,19 @@
+from dotenv import load_dotenv
 import os, sys, argparse
 import pandas as pd
 import backtrader as bt
 from backtrader import cerebro 
 from strategies.golden_cross import GoldenCross
 from strategies.buy_and_hold import BuyHold
+
+load_dotenv()
+
+DATA_CSV_PATH = os.getenv("DATA_CSV_PATH")
+START_DATE    = os.getenv("START_DATE")
+END_DATE      = os.getenv("END_DATE")
+SHORT_MA      = int(os.getenv("SHORT_MA", 50))
+LONG_MA       = int(os.getenv("LONG_MA", 200))
+PLOT          = os.getenv("PLOT", "True") == "True"
 
 strategies = {
     "golden_cross": GoldenCross,
